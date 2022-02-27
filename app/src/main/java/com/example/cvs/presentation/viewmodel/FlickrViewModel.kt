@@ -34,6 +34,7 @@ class FlickrViewModel @Inject constructor(
 
     fun onSearchClicked() {
         viewModelScope.launch {
+            _flickrUiState.value = flickrUiState.value.copy(isLoading = true)
             when (val response = flickrRepository.getFlickrResponse(searchInputState)) {
                 is NetworkResult.Success -> {
                     _flickrUiState.value = FlickrUiState(flickrImages = response.data.items)

@@ -28,34 +28,38 @@ fun FlickrListScreen(
     Column {
         val images = viewModel.flickrUiState.collectAsState()
 
-        Row {
-            SuggestionTextField(
-                modifier = Modifier
-                    .weight(3f)
-                    .zIndex(1f),
-                viewModel = viewModel
-            )
-            Button(
-                modifier = Modifier.weight(1f),
-                onClick = {
-                    viewModel.onSearchClicked()
-                }) {
-                Text(text = "Search")
+        if (images.value.isLoading) {
+            LoadingScreen()
+        } else {
+            Row {
+                SuggestionTextField(
+                    modifier = Modifier
+                        .weight(3f)
+                        .zIndex(1f),
+                    viewModel = viewModel
+                )
+                Button(
+                    modifier = Modifier.weight(1f),
+                    onClick = {
+                        viewModel.onSearchClicked()
+                    }) {
+                    Text(text = "Search")
+                }
             }
-        }
-        LazyVerticalGrid(
-            cells = GridCells.Fixed(2),
-            modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(CvsTheme.dimens.listItemPadding)
-        ) {
-            items(images.value.flickrImages) { image ->
-                FlickrRowItem(
-                    imageUrl = image.media.m,
-                    imageTitle = image.title,
-                    imageContentDescription = image.getDescription().alt
-                ) {
-                    viewModel.onItemClick(image)
-                    onItemClick()
+            LazyVerticalGrid(
+                cells = GridCells.Fixed(2),
+                modifier = Modifier.fillMaxSize(),
+                contentPadding = PaddingValues(CvsTheme.dimens.listItemPadding)
+            ) {
+                items(images.value.flickrImages) { image ->
+                    FlickrRowItem(
+                        imageUrl = image.media.m,
+                        imageTitle = image.title,
+                        imageContentDescription = image.getDescription().alt
+                    ) {
+                        viewModel.onItemClick(image)
+                        onItemClick()
+                    }
                 }
             }
         }
