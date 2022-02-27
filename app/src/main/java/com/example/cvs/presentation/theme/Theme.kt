@@ -72,13 +72,13 @@ data class Dimensions(
 )
 
 val smallDimensions = Dimensions(
-    detailsImageHeight = 300.dp,
-    listImageHeight = 128.dp,
+    detailsImageHeight = 256.dp,
+    listImageHeight = 100.dp,
     listItemPadding = 4.dp
 )
 
 val defaultDimensions = Dimensions(
-    detailsImageHeight = 600.dp,
-    listImageHeight = 256.dp,
+    detailsImageHeight = 500.dp,
+    listImageHeight = 156.dp,
     listItemPadding = 8.dp
 )
