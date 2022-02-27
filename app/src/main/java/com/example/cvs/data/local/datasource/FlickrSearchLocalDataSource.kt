@@ -9,7 +9,7 @@ class FlickrSearchLocalDataSource @Inject constructor(
     private val flickrDao: FlickrDao
 ) {
     suspend fun insertSearch(search: String) {
-        flickrDao.insertSearch(FlickrSearch(search = search))
+        flickrDao.insertAndDeleteExtraQueries(FlickrSearch(search = search))
     }
 
     fun getUserQueries(): Flow<List<FlickrSearch>> {

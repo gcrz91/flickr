@@ -8,6 +8,6 @@ data class FlickrResponse(
     val link: String,
     val description: String,
     val modified: String,
-    val generation: String,
+    val generation: String?,
     val items: List<FlickrImage>
 )

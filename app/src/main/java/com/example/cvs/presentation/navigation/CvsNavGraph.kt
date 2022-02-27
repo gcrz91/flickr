@@ -13,7 +13,7 @@ fun CvsNavGraph(
 ) {
     NavHost(navController = navController, startDestination = FLICKR_LIST_SCREEN) {
         composable(route = FLICKR_LIST_SCREEN) {
-            FlickrListScreen()
+            FlickrListScreen() { navController.navigate(FLICKR_DETAILS_SCREEN) }
         }
 
         composable(route = FLICKR_DETAILS_SCREEN) {

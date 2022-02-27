@@ -15,11 +15,11 @@ abstract class FlickrDao {
     @Insert
     abstract suspend fun insertSearch(search: FlickrSearch)
 
-    @Query("DELETE FROM flickr_search where id NOT IN (SELECT id from flickr_search ORDER BY id DESC LIMIT 5)")
+    @Query("DELETE FROM flickr_search WHERE id IN (SELECT id FROM flickr_search ORDER BY id DESC LIMIT 1 OFFSET 4)")
     abstract suspend fun deleteOldestSearch()
 
     @Transaction
-    suspend fun insertAndDeleteExtraQueries(search: FlickrSearch) {
+    open suspend fun insertAndDeleteExtraQueries(search: FlickrSearch) {
         deleteOldestSearch()
         insertSearch(search)
     }

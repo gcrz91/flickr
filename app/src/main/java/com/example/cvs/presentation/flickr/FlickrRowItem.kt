@@ -17,21 +17,20 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
+import com.example.cvs.presentation.theme.CvsTheme
 
 @Composable
 fun FlickrRowItem(
-    imageUrl: String = "https://asia.olympus-imaging.com/content/000107506.jpg",
-    imageDescription: String = "Image Description",
-    imageContentDescription: String = "Toucan Sam",
-    imageHeight: Dp = 128.dp,
-    imageWidth: Dp = 256.dp,
+    imageUrl: String,
+    imageTitle: String,
+    imageContentDescription: String,
     onClick: () -> Unit = {}
 ) {
     Column(
         Modifier
             .clickable(onClick = onClick)
             .fillMaxWidth()
-            .padding(4.dp)
+            .padding(CvsTheme.dimens.listItemPadding)
     ) {
         Card(elevation = 4.dp) {
             Column {
@@ -39,13 +38,13 @@ fun FlickrRowItem(
                     painter = rememberImagePainter(imageUrl),
                     contentDescription = imageContentDescription,
                     modifier = Modifier
-                        .height(imageHeight)
+                        .height(CvsTheme.dimens.listImageHeight)
                         .fillMaxWidth(),
                     contentScale = ContentScale.Crop
                 )
                 Divider()
                 Text(
-                    text = imageDescription,
+                    text = imageTitle,
                     modifier = Modifier.align(Alignment.CenterHorizontally)
                 )
             }
@@ -56,5 +55,9 @@ fun FlickrRowItem(
 @Preview
 @Composable
 fun FlickrRowItem_Preview() {
-    FlickrRowItem()
+    FlickrRowItem(
+        imageUrl = "https://asia.olympus-imaging.com/content/000107506.jpg",
+        imageTitle = "Image Description",
+        imageContentDescription = "Toucan Sam"
+    )
 }
